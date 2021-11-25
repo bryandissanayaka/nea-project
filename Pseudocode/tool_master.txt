@@ -1,12 +1,22 @@
 CLASS Tool
 
-	GLOBAL INTEGER - cost
-	GLOBAL STRING - toolName
-	GLOBAL BOOL - available
+	GLOBAL INTEGER  cost
+	GLOBAL STRING toolName
+	GLOBAL BOOL available
 
 	//Call this function when pressing on the UI 
 	//button corresponding to the tool
 	PUBLIC ABSTRACT FUNCTION Use():
 	    //function to be override by subclasses
 	    END FUNCTION
+
+
+
+
+
+
+CLASS Prop(Tool) //Inherits from Tool
+	
+	GLOBAL VECTOR2 
+	
 
