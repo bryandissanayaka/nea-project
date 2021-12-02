@@ -34,4 +34,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="button_down" from="StartButton" to="." method="_on_StartButton_button_down"]
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="Options" to="." method="_on_Options_pressed"]
