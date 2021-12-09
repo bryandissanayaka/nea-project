@@ -1,8 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Menus/LevelsMenu/LevelMenu.gd" type="Script" id=1]
 
 [node name="LevelMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -17,3 +20,15 @@ text = "LEVEL SELECTION SCREEN"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="FromLevelScreenToStart" type="Button" parent="."]
+margin_left = 19.4054
+margin_top = 26.8811
+margin_right = 151.405
+margin_bottom = 90.8811
+text = "Back to Start Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="FromLevelScreenToStart" to="." method="_on_FromLevelScreenToStart_pressed"]

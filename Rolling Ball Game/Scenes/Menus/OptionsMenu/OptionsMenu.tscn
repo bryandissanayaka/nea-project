@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Menus/OptionsMenu/OptionsMenu.gd" type="Script" id=1]
+
+[node name="OptionsMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlaceholderText" type="RichTextLabel" parent="."]
+margin_left = 445.0
+margin_top = 112.0
+margin_right = 723.0
+margin_bottom = 174.0
+text = "Options Screen"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="FromOptionsToStart" type="Button" parent="."]
+margin_left = 33.0
+margin_top = 33.0
+margin_right = 218.0
+margin_bottom = 99.0
+text = "Back to Start Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="FromOptionsToStart" to="." method="_on_FromOptionsToStart_pressed"]
