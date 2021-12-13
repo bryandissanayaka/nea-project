@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Default/background_green.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=2]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="Background" type="TextureRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 601.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RigidBody2D" parent="Background" instance=ExtResource( 2 )]
+position = Vector2( 287.378, 166.555 )
