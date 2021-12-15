@@ -9,6 +9,7 @@ var line_vector = Vector2.ZERO
 var line_length : float = 0
 var line_rotation : float = 0
 var line_midpoint = Vector2.ZERO
+const LINE_PIXEL_WIDTH = 32
 
 export (PackedScene) var line_scene
 
@@ -20,9 +21,9 @@ func _draw_line():
 	line_rotation = atan2(line_vector.y, line_vector.x) * RAD_TO_DEGREES
 	line_midpoint = Vector2(line_vector.x / 2, line_vector.y / 2)
 	var line = line_scene.instance()
-	add_child(line)
+	add_child(line)  #dont know why but i have to add child
 	line.global_position = start_position + line_midpoint
-	line.scale(line_length)
+	line.scale(line_length / LINE_PIXEL_WIDTH)
 	line.rotate(line_rotation)
 	
 func _input(event):

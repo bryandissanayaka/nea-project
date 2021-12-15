@@ -5,3 +5,6 @@ func scale(var size):
 	
 func rotate(var a_rotation):
 	rotation_degrees = a_rotation 
+
+func get_pixel_width():
+	pass
