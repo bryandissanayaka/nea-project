@@ -4,7 +4,7 @@ const STOP_BALL_PERCENTAGE = 0.5
 const DECREASE_PERCENTAGE = 0.7
 const REVERSED_GRAVITY_SCALE = -5
 var gravity_reversed_pressed = false
-var gravity_up = false
+var gravity_up = false # is gravity going upwards
 
 func _method_one(var delta):
 	if(Input.is_action_just_pressed("reverse_gravity") and not gravity_reversed_pressed):
@@ -18,7 +18,7 @@ func _method_one(var delta):
 			linear_velocity.y = linear_velocity.y - (linear_velocity.y * 1/ STOP_BALL_PERCENTAGE * delta)
 		else:
 			gravity_reversed_pressed = false	
-	print(linear_velocity.y)
+#	print(linear_velocity.y)
 
 
 func _method_two(delta):
@@ -26,7 +26,7 @@ func _method_two(delta):
 		gravity_scale *= REVERSED_GRAVITY_SCALE
 		gravity_reversed_pressed = true
 		gravity_up = not gravity_up
-		print("gravity reversed")
+		Debug.Log3("Gravity reversed", gravity_up, gravity_scale)
 	
 	if(gravity_reversed_pressed):
 		gravity_scale = gravity_scale - (gravity_scale * DECREASE_PERCENTAGE * delta)
@@ -36,8 +36,6 @@ func _method_two(delta):
 			elif(not gravity_up):
 				gravity_scale = 1	
 			gravity_reversed_pressed = false
-	
-	print(gravity_scale)
 
 func _ready():
 	pass

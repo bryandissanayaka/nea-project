@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Sprites/background_green.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/DrawTool.tscn" type="PackedScene" id=3]
 
 [node name="TestLevel" type="Node2D"]
 
@@ -14,5 +15,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RigidBody2D" parent="Background" instance=ExtResource( 2 )]
-position = Vector2( 287.378, 166.555 )
+[node name="Ball" parent="." instance=ExtResource( 2 )]
+position = Vector2( 521.723, 98.5193 )
+
+[node name="DrawTool" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 0 )
