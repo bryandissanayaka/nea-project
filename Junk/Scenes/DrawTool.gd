@@ -25,14 +25,26 @@ func _draw_line():
 	line.global_position = start_position + line_midpoint
 	line.scale(line_length / LINE_PIXEL_WIDTH)
 	line.rotate(line_rotation)
+	line.validate()
 	
 
-func _set_points():
-	var line = line_scene.instance()
-	add_child(line)
-	line.set_points(start_position, end_position)
-	pass	
+#func _set_points():
+#	var line = line_scene.instance()
+#	add_child(line)
+#	line.set_points(start_position, end_position)
+#	pass	
 
+
+func process_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT:
+			if event.pressed: #left click pressed
+				start_position = event.global_position
+			else: #left click released
+				end_position = event.global_position
+				_draw_line()
+				#_set_points()	
+	pass
 
 func _input(event):
 #	if event is InputEventMouseButton:
@@ -45,13 +57,8 @@ func _input(event):
 			
 #	elif (event is InputEventMouseMotion) and (is_drawing):
 #		end_position = event.global_position
+	
+	process_input(event)
+	
 
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT:
-			if event.pressed: #left click pressed
-				start_position = event.global_position
-			else: #left click released
-				end_position = event.global_position
-				_draw_line()
-				#_set_points()
 	pass

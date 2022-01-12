@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Sprites/background_green.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/DrawTool.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 571.35, 9.47394 )
 
 [node name="TestLevel" type="Node2D"]
 
@@ -20,3 +23,32 @@ position = Vector2( 521.723, 98.5193 )
 
 [node name="DrawTool" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 0 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 522.867, -5.03968 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 522.867, -5.03968 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2( -5.03967, 599.722 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2( 522.867, -5.03968 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2( 505.228, 316.24 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2( 522.867, -5.03968 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2( -529.167, 308.681 )
+rotation = 1.5708
+shape = SubResource( 1 )

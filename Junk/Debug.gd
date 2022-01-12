@@ -18,4 +18,5 @@ static func Log3(var a, var b, var c):
 	print(strg)
 	pass
 
-
+static func RadToDegrees():
+	return 57.29577951
