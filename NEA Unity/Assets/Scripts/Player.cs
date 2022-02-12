@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] private Camera _camera;
+    private Camera _camera;
 
     private Rigidbody2D _rigidBody; // variable to hold a reference to the rigidbody2d component attached to this object]
 
@@ -29,29 +29,27 @@ public class Player : MonoBehaviour
     //Teleport tool variables
     private bool _isTeleporting;
     [SerializeField] private GameObject _teleportZone;
-    [SerializeField] private float _teleportRadius;
+    private float _teleportRadius;
 
     //Push tool variables
     [SerializeField] private float _pushForce;
-    [SerializeField] private int _maxPushesCount;
+    private int _maxPushesCount;
     private int _currentPushesCount;
     [SerializeField] private TextMeshProUGUI _pushesText;
 
+    public delegate void Tools();
+    private Tools toolsDelegate;
+
     //Start is called when the object is instantiated in the scene
     private void Start() {
+        _camera = Camera.main;
         _rigidBody = GetComponent<Rigidbody2D>();                //grabs a reference of the rigidbody2d
         _rigidBody.gravityScale = _gravityNormalMagnitude;       //set the gravity scale to the normal magnitude
-        SetMaxTeleportingDistance(_teleportRadius);
-        _currentPushesCount = _maxPushesCount;
-        UpdatePushesUI();
     }
 
     //Update is called once per frame
     private void Update() {
-        HandleGravityTool();
-        HandleFreezeTool();
-        HandleTeleportTool();
-        HandlePushTool();
+        toolsDelegate();
     }
 
     private void HandleGravityTool(){
@@ -109,7 +107,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void SetMaxTeleportingDistance(float maxDistance){
+    public void SetMaxTeleportingDistance(float maxDistance){
         float diameterOfZone = maxDistance * 2;
         Vector3 scale = new Vector3(diameterOfZone, diameterOfZone, 1);
         _teleportZone.transform.localScale = scale;
@@ -133,5 +131,18 @@ public class Player : MonoBehaviour
 
     private void UpdatePushesUI() {
         _pushesText.text = $"Pushes: {_currentPushesCount}";    //set the UI text using string interpolation
+    }
+
+    public void SetMaxPushCount(int count) {
+        _maxPushesCount = count;
+        _currentPushesCount = _maxPushesCount;
+        UpdatePushesUI();
+    }
+
+    public void EnableTools(bool gravity, bool freeze, bool teleport, bool push) {
+        if (gravity) toolsDelegate += HandleGravityTool;
+        if (freeze) toolsDelegate += HandleFreezeTool;
+        if (teleport) toolsDelegate += HandleTeleportTool;
+        if (push) toolsDelegate += HandlePushTool;
     }
 }

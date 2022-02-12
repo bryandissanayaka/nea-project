@@ -3,18 +3,18 @@ using UnityEngine.UI;
 
 public class DrawTool : MonoBehaviour
 {
-	[SerializeField] private Camera _camera;         //variable to hold reference to the camera
+	private Camera _camera;         //variable to hold reference to the camera
 
     [SerializeField] private GameObject _linePrefab; //the line object prefab
     private Vector2 _startPosition;                  //the starting point of the line
     private Vector2 _endPosition;                    //the end point of the line
 
-    [SerializeField] private float _maxInk;          //the starting ink that player has
+    private float _maxInk;          //the starting ink that player has
     private float _currentInk;                       //stores the current amount of ink
     [SerializeField] private Image _inkImage;
 
     private void Start(){
-        _currentInk = _maxInk;                              //set the current ink to the maximum ink
+        _camera = Camera.main;
     }
 
     private void Update() {
@@ -35,5 +35,10 @@ public class DrawTool : MonoBehaviour
                 _inkImage.fillAmount = _currentInk / _maxInk;                               //update UI
             }
         }
+    }
+
+    public void SetMaxInk(float amount) {
+        _maxInk = amount;
+        _currentInk = _maxInk;
     }
 }
