@@ -18,6 +18,7 @@ public abstract class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) { //when an object enters the trigger area
         if (collision.CompareTag("Player")) {   //if the object is the player
             Debug.Log($"{transform.name} has collided with the Player"); //print this enemy name on the console
+            GameManager.instance.FailLevel();
         }
     }
 }

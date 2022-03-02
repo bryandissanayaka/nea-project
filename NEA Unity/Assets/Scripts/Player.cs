@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
     private bool _isTeleporting;
     [SerializeField] private GameObject _teleportZone;
     private float _teleportRadius;
+    private int _teleportCount;
+    [SerializeField] TextMeshProUGUI _teleportText;
 
     //Push tool variables
     [SerializeField] private float _pushForce;
@@ -42,6 +44,8 @@ public class Player : MonoBehaviour
 
     //Start is called when the object is instantiated in the scene
     private void Start() {
+            print("Found sprite");
+            GetComponent<SpriteRenderer>().sprite = PersistentData.GetSelectedSprite();
         _camera = Camera.main;
         _rigidBody = GetComponent<Rigidbody2D>();                //grabs a reference of the rigidbody2d
         _rigidBody.gravityScale = _gravityNormalMagnitude;       //set the gravity scale to the normal magnitude
@@ -49,6 +53,7 @@ public class Player : MonoBehaviour
 
     //Update is called once per frame
     private void Update() {
+        if (toolsDelegate == null) return;
         toolsDelegate();
     }
 
@@ -89,6 +94,7 @@ public class Player : MonoBehaviour
     }
 
     private void HandleTeleportTool(){
+        if (_teleportCount <= 0) return;
         if(Input.GetKeyDown(KeyCode.T) && !_isTeleporting){         //if the player presses T and the the teleport zone is not currently visible
             _isTeleporting = true;
             _teleportZone.SetActive(true);                          //set the gameobject to be active, therefore making the sprite visible
@@ -103,6 +109,8 @@ public class Player : MonoBehaviour
                 }
                 _isTeleporting = false;             //the player has finished using the tool (either succesfully or not if they clicked outside the area)
                 _teleportZone.SetActive(false);     //disable teleportzone game object therefore hiding the sprite showing the zone
+                _teleportCount--;
+                _teleportText.text = $"Teleports: {_teleportCount}";
             }             
         }
     }
@@ -112,6 +120,11 @@ public class Player : MonoBehaviour
         Vector3 scale = new Vector3(diameterOfZone, diameterOfZone, 1);
         _teleportZone.transform.localScale = scale;
         _teleportRadius = maxDistance;
+    }
+
+    public void SetTeleportsCount(int count) {
+        _teleportCount = count;
+        _teleportText.text = $"Teleports: {_teleportCount}";
     }
 
     private void HandlePushTool() {

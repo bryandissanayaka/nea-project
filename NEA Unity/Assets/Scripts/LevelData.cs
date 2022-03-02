@@ -4,6 +4,7 @@ public class LevelData
 	public LevelType Type;
 
 	public float TeleportRadius;
+	public int TeleportsCount;
 	public int MaxPushesCount;
 	public float MaxInkAmount;
 

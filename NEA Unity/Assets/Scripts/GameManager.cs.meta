@@ -3,7 +3,14 @@ guid: b9820c2a3233959439b643e9f2f9ebad
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _starOne: {instanceID: 0}
+  - _starTwo: {instanceID: 0}
+  - _starThree: {instanceID: 0}
+  - _completedStar: {fileID: 21300000, guid: 705f2f32ba513bc40ad186ab9d4ec2fc, type: 3}
+  - _completedLevelScreen: {instanceID: 0}
+  - _failedLevelScreen: {instanceID: 0}
+  - _pauseMenu: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

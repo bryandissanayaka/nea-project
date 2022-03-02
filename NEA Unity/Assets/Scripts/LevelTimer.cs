@@ -5,6 +5,9 @@ public class LevelTimer : MonoBehaviour
 {
 	[SerializeField] private float _time;
     [SerializeField] private TextMeshProUGUI _ui;
+
+    private bool _winWhenTimerEnds = false;
+
 	private float _current;
     private void Start() {
         _current = _time;
@@ -16,7 +19,17 @@ public class LevelTimer : MonoBehaviour
         if (_current <= 0) {
             _current = 0;
             _ui.text = "0";
-            GameManager.instance.FailLevel();
+            if (_winWhenTimerEnds) {
+                GameManager.instance.CompleteLevel();
+            }
+            else {
+                GameManager.instance.FailLevel();
+            }
+            Destroy(this);
         }
+    }
+
+    public void SetMode(bool winOnTimerEnd) {
+        _winWhenTimerEnds |= winOnTimerEnd;
     }
 }
