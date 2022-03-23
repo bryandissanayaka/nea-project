@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 using TMPro;
 
 public class MenuManager : MonoBehaviour
@@ -19,7 +20,7 @@ public class MenuManager : MonoBehaviour
     private void Awake() => GameLaunch();
 
     private void Start() {
-        //GameLaunch();
+        GameLaunch();
         DisplayLevelButtonsState();
         SetStarsCount();
     }
@@ -79,6 +80,7 @@ public class MenuManager : MonoBehaviour
     public void OnShopButtonPressed() {
         _startMenu.SetActive(false);
         _shopMenu.SetActive(true);
+        PersistentData.PlayerHasOpenedShop = true;
     }
 
     public void OnBackToStartButtonPressed(){

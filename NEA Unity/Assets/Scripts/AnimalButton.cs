@@ -18,7 +18,8 @@ public class AnimalButton : MonoBehaviour
     }
 
     public bool CanBeSelected(int currentStarsCount) {
-        return (_starsRequired <= currentStarsCount);
+        bool hasEnoughStars = _starsRequired <= currentStarsCount;
+        return (hasEnoughStars);
     }
     
     public Sprite GetSprite() {

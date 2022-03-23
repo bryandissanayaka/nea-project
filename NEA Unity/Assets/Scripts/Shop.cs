@@ -3,34 +3,33 @@ using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private AnimalButton[] _animalButtons;
-    [SerializeField] private Sprite _unlockedImage;
-    [SerializeField] private Sprite _selectedImage;
+    [SerializeField] private AnimalButton[] _animalButtons; //all the animals in the shop
+    [SerializeField] private Sprite _unlockedImage; //blue button sprite 
+    [SerializeField] private Sprite _selectedImage; //yellow button sprite
 
-    private AnimalButton _selectedAnimal;
+    private AnimalButton _selectedAnimal; //which animal is selected
 
     private void Start() {
-        int starCount = PersistentData.GetStarsCount();
-        if(PersistentData.GetSelectedAnimal() == null) {
-            PersistentData.SelectAnimal(_animalButtons[0]);
-            _animalButtons[0].SetButtonImage(_selectedImage);
-            _selectedAnimal = _animalButtons[0];
+        int starCount = PersistentData.GetStarsCount(); //get how many stars the player has
+        if(PersistentData.GetSelectedAnimal() == null) { //if the player has not selected an animal
+            PersistentData.SelectAnimal(_animalButtons[0]); //select the first one by default
+            _animalButtons[0].SetButtonImage(_selectedImage); //set the first animal's button's image to be selected
+            _selectedAnimal = _animalButtons[0]; //hold the reference to the selected animal
         }
         
-        foreach (var button in _animalButtons) {
-            int starsRequired = button.GetStarsRequired();
-            Image buttonImage = button.gameObject.GetComponent<Image>();
-            if (starsRequired <= starCount) {
-                buttonImage.sprite = _unlockedImage;
+        foreach (var button in _animalButtons) { //loop through each animal button
+            Image buttonImage = button.gameObject.GetComponent<Image>(); //get the image from the button
+            if (button.CanBeSelected(starCount)) { //if it is unlocked
+                buttonImage.sprite = _unlockedImage; //set the button's sprite to unlocked (blue)
             }
-            if (button == _selectedAnimal) {
-                buttonImage.sprite = _selectedImage;
+            if (button == _selectedAnimal) { //if it is the selected animal
+                buttonImage.sprite = _selectedImage; //set the sprite to the unlocked sprite
             }
         }
     }
 
     public void OnAnimalSelected(AnimalButton button) { //when button is pressed
-        if (button.CanBeSelected(PersistentData.GetStarsCount())) {
+        if (button.CanBeSelected(PersistentData.GetStarsCount())) { //if the button can be selected
             PersistentData.SelectAnimal(button);
             //display
             _selectedAnimal.SetButtonImage(_unlockedImage); //deselect previous animal

@@ -44,8 +44,9 @@ public class Player : MonoBehaviour
 
     //Start is called when the object is instantiated in the scene
     private void Start() {
-            print("Found sprite");
+        if (PersistentData.PlayerHasOpenedShop) {
             GetComponent<SpriteRenderer>().sprite = PersistentData.GetSelectedSprite();
+        } //if the player chose a sprite, load it. Otherwise the default one will be used.
         _camera = Camera.main;
         _rigidBody = GetComponent<Rigidbody2D>();                //grabs a reference of the rigidbody2d
         _rigidBody.gravityScale = _gravityNormalMagnitude;       //set the gravity scale to the normal magnitude
@@ -53,7 +54,7 @@ public class Player : MonoBehaviour
 
     //Update is called once per frame
     private void Update() {
-        if (toolsDelegate == null) return;
+        if (toolsDelegate == null) return; //if no tools are active, return out of the function so that the delegate is not called (null delegate will give an error if called)
         toolsDelegate();
     }
 
@@ -116,15 +117,15 @@ public class Player : MonoBehaviour
     }
 
     public void SetMaxTeleportingDistance(float maxDistance){
-        float diameterOfZone = maxDistance * 2;
-        Vector3 scale = new Vector3(diameterOfZone, diameterOfZone, 1);
-        _teleportZone.transform.localScale = scale;
-        _teleportRadius = maxDistance;
+        float diameterOfZone = maxDistance * 2; //radius into diameter
+        Vector3 scale = new Vector3(diameterOfZone, diameterOfZone, 1); //scale of the teleport zone 
+        _teleportZone.transform.localScale = scale; //set the scale
+        _teleportRadius = maxDistance; //set the max distance for the teleport tool logic
     }
 
     public void SetTeleportsCount(int count) {
-        _teleportCount = count;
-        _teleportText.text = $"Teleports: {_teleportCount}";
+        _teleportCount = count; //setter
+        _teleportText.text = $"Teleports: {_teleportCount}"; //update UI
     }
 
     private void HandlePushTool() {
@@ -146,10 +147,10 @@ public class Player : MonoBehaviour
         _pushesText.text = $"Pushes: {_currentPushesCount}";    //set the UI text using string interpolation
     }
 
-    public void SetMaxPushCount(int count) {
+    public void SetMaxPushCount(int count) { //setter
         _maxPushesCount = count;
-        _currentPushesCount = _maxPushesCount;
-        UpdatePushesUI();
+        _currentPushesCount = _maxPushesCount; //set counter to max
+        UpdatePushesUI(); 
     }
 
     public void EnableTools(bool gravity, bool freeze, bool teleport, bool push) {
