@@ -79,6 +79,7 @@ public static class PersistentData
     }
 
     public static bool PlayerHasOpenedShop; //to check if player has opened the shop at least once in the current session
+
 }
 
 
